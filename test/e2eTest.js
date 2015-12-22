@@ -6,7 +6,7 @@ var request = require('supertest'),
 
 describe('Book Inventory', function () {
 
-    let server;
+    var server;
 
     beforeEach(()=> {
         server = myServer(express).listen(3000);
