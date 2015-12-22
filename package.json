@@ -18,9 +18,9 @@
     "mongodb": "2.0.52"
   },
   "devDependencies": {
-    "heroin-js": "^1.4.0",
+    "heroin-js": "1.4.0",
     "mocha": "2.3.4",
     "nodemon": "1.8.1",
-    "supertest": "^1.1.0"
+    "supertest": "1.1.0"
   }
 }

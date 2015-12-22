@@ -1,6 +1,6 @@
 "use strict";
 
-let request = require('supertest'),
+var request = require('supertest'),
     myServer = require('../server.js'),
     express = require('express');
 
