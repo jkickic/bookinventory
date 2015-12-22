@@ -4,7 +4,7 @@
   "description": "excercise 1",
   "main": "index.js",
   "scripts": {
-    "local": "export MONGO_URL=mongodb://heroku_4x78mgjj:5c76vmaot6lpjfdubl2k6f1qc4@ds033285.mongolab.com:33285/heroku_4x78mgjj&&node app.js",
+    "local": "export MONGO_URL=mongodb://heroku_4x78mgjj:5c76vmaot6lpjfdubl2k6f1qc4@ds033285.mongolab.com:33285/heroku_4x78mgjj&&export PORT=3000&&node app.js",
     "start": "node app.js",
     "test": "mocha test/e2eTest"
   },

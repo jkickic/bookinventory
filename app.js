@@ -1,4 +1,5 @@
 var server = require('./server.js'),
-    express = require('express');
+    express = require('express'),
+    port = process.env.PORT;
 
-server(express).listen(3000);
+server(express).listen(port);
