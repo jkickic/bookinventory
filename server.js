@@ -3,50 +3,14 @@
 module.exports = function (express){
     var app = express(),
         bodyParser = require('body-parser'),
-        assert = require('assert'),
-        MongoClient = require('mongodb').MongoClient,
-        url = process.env.MONGO_URL,
-        dbConnection = MongoClient.connect(url);
+        dbConnection = require('./dbConnection')(),
+        repo = require('./booksRepository')(dbConnection),
+        routes = require('./routes')(repo);
 
-    app.use(bodyParser.json());
-
-
-    var logRequest = function (req, res, next) {
-        console.log('Time:', Date.now());
+    var logTime = function(req, res, next){
+        console.log(new Date());
         next();
-    };
-
-    app.post('/stock', (req,res) => {
-        let isbn = req.body.isbn,
-            count = req.body.count;
-
-        dbConnection.then((db) => {
-            return db.collection('booksmz').updateOne({isbn: isbn}, {
-                isbn: isbn,
-                count: count
-            }, {upsert:true});
-        }).then(code =>{
-            console.log(code);
-            res.json({success:"success"});
-        });
-    });
-
-    app.get('/books', (req,res) => {
-
-        dbConnection.then(db => {
-            return db.collection('booksmz').find({}).toArray();
-        }).then(data => {
-            res.json(data);
-        }).catch(err => {
-            console.log(err);
-            res.send('error');
-        })
-    });
-
-    app.get('/', logRequest, (req, res) => {
-        res.send('Hello World!');
-    });
-
+    }
 
     var serverError = function (err, req, res, next) {
         console.error(err.stack);
@@ -60,6 +24,17 @@ module.exports = function (express){
         console.log('404!');
         res.status(404).send('Sorry cant find that!');
     };
+
+
+    app.use(bodyParser.json());
+
+    app.post('/stock', routes.stockUp);
+
+    app.get('/', routes.index);
+    app.get('/books/:isbn', routes.getCount);
+    app.get('/books/', routes.findAll);
+    app.get('/log', logTime, routes.log);
+    app.get('/nolog', routes.nolog);
 
     app.use(serverError);
     app.use(clientError);
