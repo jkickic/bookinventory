@@ -5,7 +5,7 @@ module.exports = function (express){
         bodyParser = require('body-parser'),
         assert = require('assert'),
         MongoClient = require('mongodb').MongoClient,
-        url = 'mongodb://localhost:27017/bookinventory',
+        url = process.env.MONGO_URL,
         dbConnection = MongoClient.connect(url);
 
     app.use(bodyParser.json());
@@ -21,7 +21,7 @@ module.exports = function (express){
             count = req.body.count;
 
         dbConnection.then((db) => {
-            return db.collection('books').updateOne({isbn: isbn}, {
+            return db.collection('booksmz').updateOne({isbn: isbn}, {
                 isbn: isbn,
                 count: count
             }, {upsert:true});
@@ -34,7 +34,7 @@ module.exports = function (express){
     app.get('/books', (req,res) => {
 
         dbConnection.then(db => {
-            return db.collection('books').find({}).toArray();
+            return db.collection('booksmz').find({}).toArray();
         }).then(data => {
             res.json(data);
         }).catch(err => {
