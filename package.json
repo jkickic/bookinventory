@@ -1,0 +1,22 @@
+{
+  "name": "BookInv",
+  "version": "1.0.0",
+  "description": "excercise 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha test/e2eTest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.14.2",
+    "express": "4.13.3",
+    "mongodb": "2.0.52"
+  },
+  "devDependencies": {
+    "nodemon": "1.8.1",
+    "mocha": "2.3.4",
+    "supertest": "^1.1.0"
+  }
+}
