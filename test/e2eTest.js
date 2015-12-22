@@ -8,7 +8,7 @@ describe('Book Inventory', function () {
 
     var server;
 
-    beforeEach(()=> {
+    beforeEach(function() {
         server = myServer(express).listen(3000);
     });
 
