@@ -23,7 +23,7 @@ module.exports = function(connection) {
 
                 return db.collection('booksmz').find({isbn: isbn}).limit(1).next();
             }).then(function(result) {
-                return result.count;
+                return result ? result.count : 0;
             }).catch(function(err) {
                 console.log('catch err: ', err);
                 return res.send('catch err');

@@ -41,6 +41,7 @@ module.exports = function (express){
 
     return {
         listen: (port) => {
+            port = port ? port : 3001;
                 return app.listen(port, () => console.log(`Server running on port ${port}`))
         }
     }

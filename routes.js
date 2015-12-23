@@ -27,9 +27,13 @@ module.exports = function(dataSource) {
         },
         getCount: function(req, res) {
             dataSource.getCount(req.params.isbn).then(function(data) {
-                res.status(200).json({
-                    count: data
-                });
+                if(req.headers.accept=='text/html'){
+                    res.send("count: " + data);
+                } else {
+                    res.status(200).json({
+                        count: data
+                    });
+                }
             });
         },
         log: function (req, res) {
